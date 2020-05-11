@@ -28,9 +28,17 @@ class Home extends React.Component {
        
           const search = this.state.findRestaurant.toLowerCase()
           return restaurant.name.toLowerCase().includes(search)
-        
+         
       })
-      console.log(this.state.findRestaurant)
+      const allCategories = []
+      this.props.restaurants.forEach(restaurant => {
+      const index = allCategories.indexOf(restaurant.category)
+      if(index < 0 ){
+        allCategories.push(restaurant.category)
+      }
+        
+      });
+     
    
         return (
             <>
@@ -50,14 +58,15 @@ class Home extends React.Component {
                     
                     />
                     <div>
-
-                     {filterRestaurants.map((restaurant)=> {
+                      {allCategories.map((category)=>{
+                        return <div key={category}>{category}</div>
+                      })}
+                     {filterRestaurants.length > 0 ? filterRestaurants.map((restaurant)=> {
                        return (
                          <Cards key={restaurant.id} restaurant={restaurant}/>
                        )
-                     })}
-
-                        <p>Cards dos restaurantes</p>
+                     }): <p>Não encontramos =(</p>
+                     }
                     </div>
                 </div>
 
