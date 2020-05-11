@@ -21,7 +21,9 @@ class Cards extends React.Component {
 
                     <h5>{name}</h5>
                     <p>{deliveryTime}</p>
-                    <p>Frete: R${shipping}</p>
+                    <p>{shipping !== 0 ? `Frete: R$${shipping},00`:"Frete: Grátis"}</p>
+                    
+                        
                 </div>
                 
             </div>
