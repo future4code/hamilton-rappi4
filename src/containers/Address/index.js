@@ -1,5 +1,4 @@
-import React from 'react';
-import logo from '../../img/logo.svg';
+import React from 'react'
 import styled from 'styled-components';
 
 const Wrapper = styled.div `
@@ -9,14 +8,10 @@ const Wrapper = styled.div `
     align-items: center;
 `
 
-const ImgLogo = styled.img `
-    margin-top: 88px;
-`
-
 const Form = styled.form `
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 14px;
     width: 360px;
     padding: 16px;
 `
@@ -74,30 +69,42 @@ const Text = styled.p `
     color: #000;
 `
 
-class Login extends React.Component {
+class Address extends React.Component {
     render() {
         return (
             <Wrapper>
-                <ImgLogo src={logo} />
-
-                <Text>Entrar</Text>
+                <Text>Meu endereço</Text>
                 <Form>
                     <Rectangle>
-                        <LabelInput>E-mail:</LabelInput>
-                        <Input placeholder="email@email.com"/>
+                        <LabelInput>Logradouro*</LabelInput>
+                        <Input placeholder="Rua / Av."/>
                     </Rectangle>                            
                     
                     <Rectangle>
-                        <LabelInput>Senha:</LabelInput>
-                        <Input placeholder="Mínimo 6 caracteres"/>
+                        <LabelInput>Número*</LabelInput>
+                        <Input placeholder="Número"/>
                     </Rectangle>                                        
-                    <Button>Entrar</Button>
+                    <Rectangle>
+                        <LabelInput>Complemento*</LabelInput>
+                        <Input placeholder="Apto. / Bloco"/>
+                    </Rectangle>                                        
+                    <Rectangle>
+                        <LabelInput>Bairro*</LabelInput>
+                        <Input placeholder="Bairro"/>
+                    </Rectangle>                                        
+                    <Rectangle>
+                        <LabelInput>Cidade*</LabelInput>
+                        <Input placeholder="Cidade"/>
+                    </Rectangle>                                        
+                    <Rectangle>
+                        <LabelInput>Estado*</LabelInput>
+                        <Input placeholder="Estado"/>
+                    </Rectangle>                                        
+                    <Button>Salvar</Button>
                 </Form>
-
-                <Text>Não possui cadastro? Clique aqui.</Text>
             </Wrapper>
         )
     }
 }
 
-export default Login;
+export default Address;

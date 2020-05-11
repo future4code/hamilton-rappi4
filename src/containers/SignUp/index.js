@@ -1,6 +1,6 @@
-import React from 'react';
-import logo from '../../img/logo.svg';
+import React from 'react'
 import styled from 'styled-components';
+import logo from '../../img/logo.svg';
 
 const Wrapper = styled.div `
     display: flex;
@@ -16,7 +16,7 @@ const ImgLogo = styled.img `
 const Form = styled.form `
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 14px;
     width: 360px;
     padding: 16px;
 `
@@ -74,30 +74,40 @@ const Text = styled.p `
     color: #000;
 `
 
-class Login extends React.Component {
+class SignUp extends React.Component {
     render() {
         return (
             <Wrapper>
                 <ImgLogo src={logo} />
 
-                <Text>Entrar</Text>
+                <Text>Cadastrar</Text>
                 <Form>
                     <Rectangle>
-                        <LabelInput>E-mail:</LabelInput>
-                        <Input placeholder="email@email.com"/>
+                        <LabelInput>Nome*</LabelInput>
+                        <Input placeholder="Nome e sobrenome"/>
                     </Rectangle>                            
                     
                     <Rectangle>
-                        <LabelInput>Senha:</LabelInput>
-                        <Input placeholder="Mínimo 6 caracteres"/>
+                        <LabelInput>E-mail*</LabelInput>
+                        <Input placeholder="email@email.com"/>
                     </Rectangle>                                        
-                    <Button>Entrar</Button>
+                    <Rectangle>
+                        <LabelInput>CPF*</LabelInput>
+                        <Input placeholder="000.000.000-00"/>
+                    </Rectangle>                                        
+                    <Rectangle>
+                        <LabelInput>Senha*</LabelInput>
+                        <Input placeholder="Mínimo de 6 caracteres"/>
+                    </Rectangle>                                        
+                    <Rectangle>
+                        <LabelInput>Confirmar*</LabelInput>
+                        <Input placeholder="Confirme a senha anterior"/>
+                    </Rectangle>                                        
+                    <Button>Criar</Button>
                 </Form>
-
-                <Text>Não possui cadastro? Clique aqui.</Text>
             </Wrapper>
         )
     }
 }
 
-export default Login;
+export default SignUp;
