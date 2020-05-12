@@ -104,3 +104,42 @@ export const DarkDiv = styled.div `
 export const TextProfile = styled.p `
   margin-left: 16px;
 `
+
+export const signUpForm = [
+  {
+    name: "name",
+    type: "text",
+    label: "Nome* ",
+    pattern: "[A-Za-z çÇ]{3,}",
+    title: "Mínimo 3 caracteres",
+    placeholder: "Nome e Sobrenome",
+  },
+  {
+    name: "email",
+    type: "email",
+    label: "Email* ",
+    placeholder: "email@email.com",
+  },
+  {
+    name: "cpf",
+    type: "number",
+    label: "CPF* ",
+    placeholder: "000.000.000.00",
+  },
+  {
+    name: "password",
+    type: "password",
+    pattern: "{5,}",
+    title: "Mínimo 6 caracteres",
+    label: "Senha* ",
+    placeholder: "Mínimo de 6 caracteres",
+  },
+  {
+    name: "confirmPassword",
+    type: "password",
+    pattern: "{5,}",
+    title: "Mínimo 6 caracteres",
+    label: "Confirmar* ",
+    placeholder: "Confirme a senha anterior",
+  },
+];

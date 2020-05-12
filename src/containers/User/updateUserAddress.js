@@ -1,9 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
-import { routes } from "../Router";
 import Header from "../../components/Header/Header";
-import { Wrapper, Form, Rectangle, Button, Input, LabelInput, Text} from "../../components/globalStyle"
+import { Wrapper, Form, Rectangle, Button, Input, LabelInput} from "../../components/globalStyle"
 import { updateUser } from "../../actions/profile";
 
 class updateUserAddress extends React.Component {
@@ -18,9 +16,9 @@ class updateUserAddress extends React.Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
     
-    this.props.updateAddress(this.state)
-        
+    this.props.updateAddress(this.state)  
   };
+  
   render() {
     const {
       street,

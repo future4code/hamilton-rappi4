@@ -1,9 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
-import { routes } from "../Router";
 import Header from "../../components/Header/Header";
-import { Wrapper, Form, Rectangle, Button, Input, LabelInput, Text, WrapperProfile, CustomDiv, DarkDiv, TextProfile} from "../../components/globalStyle"
+import { WrapperProfile, CustomDiv, DarkDiv, TextProfile} from "../../components/globalStyle"
 import { getUserInfo } from '../../actions/profile'
 import editIcon from '../../img/edit.svg'
 
