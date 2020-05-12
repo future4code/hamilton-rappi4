@@ -1,0 +1,75 @@
+import styled from "styled-components"
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ImgLogo = styled.img`
+  margin-top: 88px;
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 360px;
+  padding: 16px;
+`;
+
+export const Rectangle = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 328px;
+  height: 56px;
+  border-radius: 2px;
+  border: solid 1px #b8b8b8;
+`;
+
+export const Button = styled.button`
+  background-color: #e86e5a;
+  border-radius: 2px;
+  border: none;
+  width: 328px;
+  height: 42px;
+  font-weight: bold;
+`;
+
+export const Input = styled.input`
+  width: 264px;
+  height: 18px;
+  border: none;
+  margin: 19px 48px 19px 16px;
+  background-color: #fafafa;
+`;
+
+export const LabelInput = styled.label`
+  height: 18px;
+  font-family: Roboto;
+  font-size: 12px;
+  letter-spacing: -0.29px;
+  color: #b8b8b8;
+  position: absolute;
+  left: 10px;
+  top: -15%;
+  z-index: 1;
+  background-color: #fafafa;
+`;
+
+export const Text = styled.p`
+  width: 296px;
+  height: 18px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.39px;
+  text-align: center;
+  color: #000;
+`;
