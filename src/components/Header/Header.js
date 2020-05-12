@@ -10,12 +10,18 @@ const Wrapper = styled.div`
     flex-direction: flex-start;
     border-bottom: 1px solid #b8b8b8;
     padding: 15px 7px;
+    p{
+        margin: 0 auto;
+        width: 100%;
+        text-align: center;
+    }
 `
 
 function Header (props) {
     return(
         <Wrapper>
-            <img src= {back} onClick = {() => {props.previousPage()}}/>
+            {props.goBack ? <img src= {back} onClick = {() => {props.previousPage()}}/> : false}
+            <p>{props.title}</p>
         </Wrapper>
     )
 } 
