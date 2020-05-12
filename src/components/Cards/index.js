@@ -3,10 +3,10 @@ import { CardImage, Main, DeliveryInfo } from "./styled";
 
 class Cards extends React.Component {
   render() {
-    const { name, logoUrl, deliveryTime, shipping } = this.props.restaurant;
+    const { name, logoUrl, deliveryTime, shipping, id } = this.props.restaurant;
 
     return (
-      <Main>
+      <Main onClick={()=>{this.props.goToRestaurantDetails(id)}} >
         <div>
           <CardImage src={logoUrl} alt={name} />
         </div>
@@ -24,5 +24,7 @@ class Cards extends React.Component {
     );
   }
 }
+
+
 
 export default Cards;
