@@ -1,34 +1,28 @@
-import React from 'react';
-
-
-
-
-
+import React from "react";
+import { CardImage, Main, DeliveryInfo } from "./styled";
 
 class Cards extends React.Component {
-    render(){
+  render() {
+    const { name, logoUrl, deliveryTime, shipping } = this.props.restaurant;
 
-      const { name, logoUrl, deliveryTime, shipping } = this.props.restaurant
+    return (
+      <Main>
+        <div>
+          <CardImage src={logoUrl} alt={name} />
+        </div>
+        <>
+          <h5>{name}</h5>
 
-        return(
-
-            <div>
-                <div>
-                    <img src={logoUrl} alt={name}/>
-
-                </div>
-                <div>
-
-                    <h5>{name}</h5>
-                    <p>{deliveryTime}</p>
-                    <p>{shipping !== 0 ? `Frete: R$${shipping},00`:"Frete: Grátis"}</p>
-                    
-                        
-                </div>
-                
-            </div>
-        )
-    }
+          <DeliveryInfo>
+            <p>{deliveryTime}min</p>
+            <p>
+              {shipping !== 0 ? `Frete: R$${shipping},00` : "Frete: Grátis"}
+            </p>
+          </DeliveryInfo>
+        </>
+      </Main>
+    );
+  }
 }
 
 export default Cards;
