@@ -9,7 +9,7 @@ class Restaurant extends React.Component {
     return (
       <div>
         <h2>Restaurante</h2>
-        
+
 
 
         {/* <Main>
@@ -36,6 +36,7 @@ class Restaurant extends React.Component {
 
 const mapStateToProps = (state) => ({
     restaurants: state.restaurants.restaurants,
+    restaurantDetails: state.restaurants.restaurantDetails
   });
   
   const mapDispatchToProps = (dispatch) =>
