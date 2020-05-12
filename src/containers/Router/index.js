@@ -5,7 +5,7 @@ import Login from '../Login';
 import SignUp from '../SignUp';
 import Address from "../Address";
 
-const routes = {
+export const routes = {
   login: '/',
   signup: '/signup',
   address: '/signup/address'

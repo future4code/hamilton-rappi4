@@ -1,113 +1,119 @@
-import React from 'react'
-import styled from 'styled-components';
-import logo from '../../img/logo.svg';
+import React from "react";
+import styled from "styled-components";
+import logo from "../../img/logo.svg";
+import { connect } from "react-redux";
+import { push } from "connected-react-router";
+import { routes } from "../Router";
+import { signUp } from "../../actions/authentication";
+import Header from "../../components/Header/Header";
+import { Wrapper, Form, Rectangle, Button, Input, LabelInput, Text} from "../../components/globalStyle"
 
-const Wrapper = styled.div `
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`
-
-const ImgLogo = styled.img `
-    margin-top: 88px;
-`
-
-const Form = styled.form `
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    width: 360px;
-    padding: 16px;
-`
-
-const Rectangle = styled.div `
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 328px;
-    height: 56px;
-    border-radius: 2px;
-    border: solid 1px #b8b8b8;
-`
-
-const Button = styled.button `
-    background-color: #e86e5a;
-    border-radius: 2px;
-    border: none;
-    width: 328px;
-    height: 42px;
-    font-weight: bold;
-`
-
-const Input = styled.input `
-    width: 264px;
-    height: 18px;
-    border: none;
-    margin: 0 48px 0 16px;
-`
-
-const LabelInput = styled.label `
-    width: 78px;
-    height: 18px;
-    font-family: Roboto;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: -0.29px;
-    color: #b8b8b8;
-`
-
-const Text = styled.p `
-    width: 296px;
-    height: 18px;
-    font-family: Roboto;
-    font-size: 16px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: -0.39px;
-    text-align: center;
-    color: #000;
-`
+const ImgLogo = styled.img`
+  margin-top: 48px;
+`;
 
 class SignUp extends React.Component {
-    render() {
-        return (
-            <Wrapper>
-                <ImgLogo src={logo} />
+  state = {};
 
-                <Text>Cadastrar</Text>
-                <Form>
-                    <Rectangle>
-                        <LabelInput>Nome*</LabelInput>
-                        <Input placeholder="Nome e sobrenome"/>
-                    </Rectangle>                            
-                    
-                    <Rectangle>
-                        <LabelInput>E-mail*</LabelInput>
-                        <Input placeholder="email@email.com"/>
-                    </Rectangle>                                        
-                    <Rectangle>
-                        <LabelInput>CPF*</LabelInput>
-                        <Input placeholder="000.000.000-00"/>
-                    </Rectangle>                                        
-                    <Rectangle>
-                        <LabelInput>Senha*</LabelInput>
-                        <Input placeholder="Mínimo de 6 caracteres"/>
-                    </Rectangle>                                        
-                    <Rectangle>
-                        <LabelInput>Confirmar*</LabelInput>
-                        <Input placeholder="Confirme a senha anterior"/>
-                    </Rectangle>                                        
-                    <Button>Criar</Button>
-                </Form>
-            </Wrapper>
-        )
+  handleInput = (e) => {
+    const { name, value } = e.target;
+
+    this.setState({ [name]: value });
+  };
+
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    const { name, email, cpf, password, confirmPassword } = this.state; // Dar um jeito de não repetir código
+
+    if (password !== confirmPassword) {
+      alert("Senhas não batem");
+    } else {
+      // this.props.signUp(name, email, cpf, password);
+      // this.props.goToAddress();
     }
+  };
+
+  render() {
+    const { name, email, cpf, password, confirmPassword } = this.state;
+
+    return (
+      <Wrapper>
+        <Header />
+        <ImgLogo src={logo} />
+
+        <Text>Cadastrar</Text>
+        <Form onSubmit={this.handleFormSubmit}>
+          <Rectangle>
+            <LabelInput>Nome*</LabelInput>
+            <Input
+              required
+              name="name"
+              value={name || ""}
+              onChange={this.handleInput}
+              placeholder="Nome e sobrenome"
+            />
+          </Rectangle>
+
+          <Rectangle>
+            <LabelInput>E-mail*</LabelInput>
+            <Input
+              required
+              name="email"
+              type="email"
+              value={email || ""}
+              onChange={this.handleInput}
+              placeholder="email@email.com"
+            />
+          </Rectangle>
+
+          <Rectangle>
+            <LabelInput>CPF*</LabelInput>
+            <Input
+              required
+              name="cpf"
+              value={cpf || ""}
+              onChange={this.handleInput}
+              placeholder="000.000.000.00"
+            />
+          </Rectangle>
+
+          <Rectangle>
+            <LabelInput>Senha*</LabelInput>
+            <Input
+              required
+              name="password"
+              type="password"
+              value={password || ""}
+              onChange={this.handleInput}
+              placeholder="Mínimo de 6 caracteres"
+            />
+          </Rectangle>
+
+          <Rectangle>
+            <LabelInput>Confirmar*</LabelInput>
+            <Input
+              required
+              name="confirmPassword"
+              type="password"
+              value={confirmPassword || ""}
+              onChange={this.handleInput}
+              placeholder="Confirme a senha anterior"
+            />
+          </Rectangle>
+
+          <Button type="submit">Criar</Button>
+        </Form>
+      </Wrapper>
+    );
+  }
 }
 
-export default SignUp;
+const mapDispatchToProps = (dispatch) => ({
+  goToAddress: () => {
+    dispatch(push(routes.address));
+  },
+  signUp: (name, email, cpf, password) =>
+    dispatch(signUp(name, email, cpf, password)),
+});
+
+export default connect(null, mapDispatchToProps)(SignUp);
