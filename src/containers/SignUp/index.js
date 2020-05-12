@@ -38,7 +38,7 @@ class SignUp extends React.Component {
 
     return (
       <Wrapper>
-        <Header />
+        <Header goBack={true}/>
         <ImgLogo src={logo} />
 
         <Text>Cadastrar</Text>
