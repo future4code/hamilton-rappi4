@@ -12,7 +12,7 @@ export const login = (email, password) => async (dispatch) => {
   try {
     const response = await axios.post(`${baseUrl}/login`, body);
     localStorage.setItem("token", response.data.token);
-    response.data.user.hasAddress ? alert("Logado com sucesso") : dispatch(push(routes.address))
+    response.data.user.hasAddress ? dispatch(push(routes.home)) : dispatch(push(routes.address))
   } catch (err) {
     console.error(err);
   }
@@ -44,7 +44,7 @@ export const addAddress = (body) => async (dispatch) => {
       },
     });
     localStorage.setItem("token", response.data.token);
-    console.log("Foi!", localStorage.getItem("token"));
+    dispatch(push(routes.home))
   } catch (err) {
     console.error(err);
   }

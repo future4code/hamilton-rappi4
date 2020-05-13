@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../../img/logo.svg";
 import { login } from "../../actions/authentication";
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
+import { push, replace } from "connected-react-router";
 import { routes } from "../Router";
 import {
   Wrapper,
@@ -18,6 +18,14 @@ import { loginForm } from "../../components/globalForms";
 
 class Login extends React.Component {
   state = {};
+
+  componentDidMount() {
+    const token = localStorage.getItem("token")
+    
+    if(token !== null){
+      this.props.goToHomePage()
+    }
+  }
 
   handleInput = (e) => {
     const { name, value } = e.target;
@@ -79,6 +87,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(push(routes.signup));
   },
   login: (email, password) => dispatch(login(email, password)),
+  goToHomePage: () => dispatch(replace(routes.home))
 });
 
 export default connect(null, mapDispatchToProps)(Login);

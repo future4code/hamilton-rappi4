@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { addAddress } from "../../actions/authentication";
 import Header from "../../components/Header/Header";
+import { push, replace } from "connected-react-router";
+import { routes } from "../Router";
 import {
   Wrapper,
   Form,
@@ -15,6 +17,14 @@ import { addressForm } from "../../components/globalForms";
 
 class Address extends React.Component {
   state = {};
+
+  componentDidMount() {
+    const token = localStorage.getItem("token")
+    
+    if(token !== null){
+      this.props.goToHomePage()
+    }
+  }
 
   handleInput = (e) => {
     const { name, value } = e.target;
@@ -31,7 +41,7 @@ class Address extends React.Component {
   render() {
     return (
       <Wrapper>
-        <Header goBack={true} />
+        <Header goBack={false} />
 
         <Text>Meu endereço</Text>
 
@@ -41,7 +51,7 @@ class Address extends React.Component {
               <Rectangle key={input.name}>
                 <LabelInput key={input.label}>{input.label}</LabelInput>
                 <Input
-                  required
+                  required={input.required}
                   name={input.name}
                   type={input.type}
                   pattern={input.pattern}
@@ -63,6 +73,7 @@ class Address extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   addAddress: (add) => dispatch(addAddress(add)),
+  goToHomePage: () => dispatch(replace(routes.home))
 });
 
 export default connect(null, mapDispatchToProps)(Address);

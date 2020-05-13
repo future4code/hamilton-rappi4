@@ -76,6 +76,9 @@ export const Text = styled.p`
   letter-spacing: -0.39px;
   text-align: center;
   color: #000;
+  span{
+    color: #e86e5a;
+  }
 `;
 
 export const WrapperProfile = styled.div`

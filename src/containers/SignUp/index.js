@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import logo from "../../img/logo.svg";
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
+import { push, replace } from "connected-react-router";
 import { routes } from "../Router";
 import { signUp } from "../../actions/authentication";
 import Header from "../../components/Header/Header";
@@ -24,6 +24,14 @@ const ImgLogo = styled.img`
 class SignUp extends React.Component {
   state = {};
 
+  componentDidMount() {
+    const token = localStorage.getItem("token")
+    
+    if(token !== null){
+      this.props.goToHomePage()
+    }
+  }
+
   handleInput = (e) => {
     const { name, value } = e.target;
 
@@ -37,9 +45,8 @@ class SignUp extends React.Component {
     if (password !== confirmPassword) {
       alert("Senhas não batem");
     } else {
-      // this.props.signUp(name, email, cpf, password);
-      // this.props.goToAddress();
-      console.log(this.state);
+      this.props.signUp(name, email, cpf, password);
+      this.props.goToAddress();
     }
   };
 
@@ -82,6 +89,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   signUp: (name, email, cpf, password) =>
     dispatch(signUp(name, email, cpf, password)),
+  goToHomePage: () => dispatch(replace(routes.home))  
 });
 
 export default connect(null, mapDispatchToProps)(SignUp);

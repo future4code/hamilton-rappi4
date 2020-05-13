@@ -1,5 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import { replace } from "connected-react-router";
+import { routes } from "../Router";
 import Header from "../../components/Header/Header";
 import {
   Wrapper,
@@ -14,6 +16,14 @@ import { updateAddress } from "../../actions/profile"
 
 class updateUserAddress extends React.Component {
   state = {};
+
+  componentDidMount() {
+    const token = localStorage.getItem("token");
+
+    if(token === null){
+      this.props.goToLogin()
+    }
+  }
 
   handleInput = (e) => {
     const { name, value } = e.target;
@@ -59,7 +69,8 @@ class updateUserAddress extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  updateAddress: (state) => dispatch(updateAddress(state))
+  updateAddress: (state) => dispatch(updateAddress(state)),
+  goToLogin: () => dispatch(replace(routes.login))
 });
 
 export default connect(null, mapDispatchToProps)(updateUserAddress);
