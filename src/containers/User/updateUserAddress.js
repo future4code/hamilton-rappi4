@@ -1,9 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addAddress } from "../../actions/authentication";
-import Header from "../../components/Header/Header";
-import { push, replace } from "connected-react-router";
+import { replace } from "connected-react-router";
 import { routes } from "../Router";
+import Header from "../../components/Header/Header";
 import {
   Wrapper,
   Form,
@@ -11,18 +10,18 @@ import {
   Button,
   Input,
   LabelInput,
-  Text,
 } from "../../components/globalStyle";
 import { addressForm } from "../../components/globalForms";
+import { updateAddress } from "../../actions/profile"
 
-class Address extends React.Component {
+class updateUserAddress extends React.Component {
   state = {};
 
   componentDidMount() {
-    const token = localStorage.getItem("token")
-    
-    if(token !== null){
-      this.props.goToHomePage()
+    const token = localStorage.getItem("token");
+
+    if(token === null){
+      this.props.goToLogin()
     }
   }
 
@@ -35,15 +34,13 @@ class Address extends React.Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
 
-    this.props.addAddress(this.state);
+    this.props.updateAddress(this.state)
   };
 
   render() {
     return (
       <Wrapper>
-        <Header goBack={false} />
-
-        <Text>Meu endereço</Text>
+        <Header goBack={true} title={"Endereço"} />
 
         <Form onSubmit={this.handleFormSubmit}>
           {addressForm.map((input) => {
@@ -51,7 +48,7 @@ class Address extends React.Component {
               <Rectangle key={input.name}>
                 <LabelInput key={input.label}>{input.label}</LabelInput>
                 <Input
-                  required={input.required}
+                  required = {input.required}
                   name={input.name}
                   type={input.type}
                   pattern={input.pattern}
@@ -64,7 +61,7 @@ class Address extends React.Component {
             );
           })}
 
-          <Button type="submit">Salvar</Button>
+          <Button type="submit">Atualizar</Button>
         </Form>
       </Wrapper>
     );
@@ -72,8 +69,8 @@ class Address extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addAddress: (add) => dispatch(addAddress(add)),
-  goToHomePage: () => dispatch(replace(routes.home))
+  updateAddress: (state) => dispatch(updateAddress(state)),
+  goToLogin: () => dispatch(replace(routes.login))
 });
 
-export default connect(null, mapDispatchToProps)(Address);
+export default connect(null, mapDispatchToProps)(updateUserAddress);

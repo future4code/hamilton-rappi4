@@ -1,16 +1,14 @@
-
 const initialState = {
-    restaurants: [],
-    restaurantDetails: null
-}
+  restaurants: [],
+  restaurantDetails: null,
+};
 
-const restaurants = (state =  initialState, action) =>{
-    switch(action.type) {
-        
-        case "SET_ALL_RESTAURANTS":
-            return {...state, restaurants:action.payload.restaurants}
+const restaurants = (state = initialState, action) => {
+  switch (action.type) {
+    case "SET_ALL_RESTAURANTS":
+      return { ...state, restaurants: action.payload.restaurants };
 
-        case "SET_RESTAURANT_DETAILS":
+    case "SET_RESTAURANT_DETAILS":
 
             let sortedProducts = {}
 
