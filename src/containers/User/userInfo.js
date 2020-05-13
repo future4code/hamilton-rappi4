@@ -12,6 +12,7 @@ import {
 } from "../../components/globalStyle";
 import { getUserInfo, getOrdersHistory } from "../../actions/profile";
 import editIcon from "../../img/edit.svg";
+import OrderCard from '../../components/OrderCard';
 
 class Profile extends React.Component {
   state = {};
@@ -56,9 +57,15 @@ class Profile extends React.Component {
         {ordersToString === "[]" || ordersToString === undefined ? (
           <TextProfile>Você não realizou nenhum pedido.</TextProfile>
         ) : (
-          this.props.orders.map((order) => {
-            return <p>{order}</p>;
-          })
+          this.props.orders.map(order => {
+            return (
+              <OrderCard 
+                restaurant={order.restaurantName}
+                date={"13 de Maio de 2020"}
+                totalPrice={order.totalPrice}
+              />
+            )
+          })          
         )}
 
         <Footer isOnUserInfo={true} />
