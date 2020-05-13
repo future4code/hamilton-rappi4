@@ -53,7 +53,7 @@ export const signUpForm = [
     {
       name: "complement",
       type: "text",
-      label: "Complemento* ",
+      label: "Complemento ",
       placeholder: "Apto. / Bloco",
       required: false,
     },
@@ -98,7 +98,7 @@ export const signUpForm = [
       name: "cpf",
       type: "text",
       label: "CPF* ",
-      placeholder: "000.000.000.00",
+      placeholder: "000.000.000-00",
     },
   ];
   

@@ -9,6 +9,9 @@ import updateUserAddress from "../User/updateUserAddress";
 import updateUserInfo from '../User/updateUserInfo';
 import Home from "../Home";
 import Restaurant from "../Restaurant";
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { connect } from "react-redux";
+import { Loader } from "../../components/globalStyle"
 
 export const routes = {
   login: '/',
@@ -34,8 +37,15 @@ function Router(props) {
         <Route path={routes.home} component={Home} />
         <Route path={routes.restaurant} component={Restaurant} />
       </Switch>
+      <Loader>
+        {props.loading && <CircularProgress />}
+      </Loader>
     </ConnectedRouter>
   );
 }
 
-export default Router;
+const mapStateToProps = (state) => ({
+  loading: state.profiles.isLoading
+})
+
+export default connect(mapStateToProps)(Router);
