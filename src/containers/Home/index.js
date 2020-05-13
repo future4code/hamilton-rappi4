@@ -3,6 +3,7 @@ import Cards from "../../components/Cards";
 import { bindActionCreators } from "redux";
 import * as restaurantActions from "../../actions/restaurants";
 import { connect } from "react-redux";
+import Footer from '../../components/Footer/Footer';
 import {
   Title,
   Main,
@@ -118,6 +119,7 @@ class Home extends React.Component {
             )}
           </div>
         </div>
+        <Footer isOnHome={true} />
       </Main>
     );
   }

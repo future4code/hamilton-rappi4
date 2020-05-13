@@ -6,6 +6,9 @@ import CartIconFalse from '../../img/shopping-cart-false.svg'
 import CartIconTrue from '../../img/shopping-cart-true.svg'
 import AvatarIconFalse from '../../img/avatar-false.svg'
 import AvatarIconTrue from '../../img/avatar-true.svg'
+import { connect } from "react-redux";
+import { push } from "connected-react-router";
+import { routes } from "../../containers/Router";
 
 const WrapperFooter = styled.div `
     width: 100%;
@@ -14,17 +17,86 @@ const WrapperFooter = styled.div `
     padding: 10px 7px;
     position: fixed;
     bottom: 0;
-    border-top: 1px solid #b8b8b8;    
+    border-top: 1px solid #b8b8b8;
+    background-color: white;
 `
 
-function Footer() {
-    return (
-        <WrapperFooter>
-            <img src={HomeIconFalse} />
-            <img src={CartIconFalse} />
-            <img src={AvatarIconFalse} />
-        </WrapperFooter>
-    )
+class Footer extends React.Component {
+
+    state = {
+        homeBoolean: true,
+        cartBoolean: false,
+        avatarBoolean: false
+    }
+
+    componentDidMount() {
+        if(this.props.isOnHome){
+            this.setState({
+                homeBoolean: true,
+                cartBoolean: false,
+                avatarBoolean: false
+            })
+        }
+        
+        if(this.props.isOnCart){
+            this.setState({
+                homeBoolean: false,
+                cartBoolean: true,
+                avatarBoolean: false
+            })
+        }
+        
+        if(this.props.isOnUserInfo){
+            this.setState({
+                homeBoolean: false,
+                cartBoolean: false,
+                avatarBoolean: true
+            })
+        }
+    }
+
+    render() {
+        let iconHome
+        let iconCart
+        let iconAvatar
+
+        if(this.state.homeBoolean){
+            iconHome = HomeIconTrue
+        }else{
+            iconHome = HomeIconFalse
+        }
+        
+        if(this.state.cartBoolean){
+            iconCart = CartIconTrue
+        }else{
+            iconCart = CartIconFalse
+        }
+        
+        if(this.state.avatarBoolean){
+            iconAvatar = AvatarIconTrue
+        }else{
+            iconAvatar = AvatarIconFalse
+        }
+
+        return (
+            <WrapperFooter>
+                <img src={iconHome} onClick={() => this.props.goToHome()} />
+                
+                <img src={iconCart} />
+                
+                <img src={iconAvatar} onClick={() => this.props.goToUserInfo()} />                
+            </WrapperFooter>
+        )
+    }
+    
 }
 
-export default Footer;
+const mapDispatchToProps = (dispatch) => ({
+    goToHome: () => dispatch(push(routes.home)),
+    
+    // Criar goToCart
+    
+    goToUserInfo: () => dispatch(push(routes.profile))
+})
+
+export default connect(null, mapDispatchToProps)(Footer);

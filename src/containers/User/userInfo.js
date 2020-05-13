@@ -61,7 +61,7 @@ class Profile extends React.Component {
           })
         )}
 
-        <Footer />
+        <Footer isOnUserInfo={true} />
       </WrapperProfile>
     );
   }
