@@ -9,6 +9,7 @@ import updateUserAddress from "../User/updateUserAddress";
 import updateUserInfo from '../User/updateUserInfo';
 import Home from "../Home";
 import Restaurant from "../Restaurant";
+import Cart from "../Cart";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { connect } from "react-redux";
 import { Loader } from "../../components/globalStyle"
@@ -22,6 +23,7 @@ export const routes = {
   updateInfo: '/profile/updateInfo',
   home: "/home",
   restaurant: "/restaurant/:id",
+  cart: "/cart"
 };
 
 function Router(props) {
@@ -34,8 +36,9 @@ function Router(props) {
         <Route exact path={routes.profile} component={Profile} />
         <Route exact path={routes.updateAddress} component={updateUserAddress} />
         <Route exact path={routes.updateInfo} component={updateUserInfo} />
-        <Route path={routes.home} component={Home} />
-        <Route path={routes.restaurant} component={Restaurant} />
+        <Route exact path={routes.home} component={Home} />
+        <Route exact path={routes.restaurant} component={Restaurant} />
+        <Route exact path={routes.cart} component={Cart} />
       </Switch>
       <Loader>
         {props.loading && <CircularProgress />}
