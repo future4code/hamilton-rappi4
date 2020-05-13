@@ -14,8 +14,8 @@ import {
   Input,
   LabelInput,
   Text,
-  signUpForm
 } from "../../components/globalStyle";
+import { signUpForm } from "../../components/globalForms";
 
 const ImgLogo = styled.img`
   margin-top: 48px;
@@ -39,7 +39,7 @@ class SignUp extends React.Component {
     } else {
       // this.props.signUp(name, email, cpf, password);
       // this.props.goToAddress();
-      console.log(this.state)
+      console.log(this.state);
     }
   };
 
@@ -53,15 +53,15 @@ class SignUp extends React.Component {
         <Form onSubmit={this.handleFormSubmit}>
           {signUpForm.map((input) => {
             return (
-              <Rectangle key= {input.name}>
-                <LabelInput key= {input.label}>{input.label}</LabelInput>
+              <Rectangle key={input.name}>
+                <LabelInput key={input.label}>{input.label}</LabelInput>
                 <Input
                   required
-                  name= {input.name}
-                  type= {input.type}
-                  pattern= {input.pattern}
-                  title= {input.title}
-                  placeholder= {input.placeholder}
+                  name={input.name}
+                  type={input.type}
+                  pattern={input.pattern}
+                  title={input.title}
+                  placeholder={input.placeholder}
                   value={this.state[input.name] || ""}
                   onChange={this.handleInput}
                 />

@@ -1,7 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import Header from "../../components/Header/Header";
-import { Wrapper, Form, Rectangle, Button, Input, LabelInput} from "../../components/globalStyle"
+import {
+  Wrapper,
+  Form,
+  Rectangle,
+  Button,
+  Input,
+  LabelInput,
+} from "../../components/globalStyle";
+import { infoForm } from "../../components/globalForms";
 
 class updateUserInfo extends React.Component {
   state = {};
@@ -14,52 +22,30 @@ class updateUserInfo extends React.Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault();
-        
   };
   render() {
-    const {
-      name,
-      email,
-      cpf
-    } = this.state;
-
     return (
       <Wrapper>
-        <Header goBack={true} title={"Editar"}/>
+        <Header goBack={true} title={"Editar"} />
 
         <Form onSubmit={this.handleFormSubmit}>
-          <Rectangle>
-            <LabelInput>Nome*</LabelInput>
-            <Input
-              required
-              name="name"
-              value={name || ""}
-              onChange={this.handleInput}
-              placeholder=""
-            />
-          </Rectangle>
-
-          <Rectangle>
-            <LabelInput>E-mail*</LabelInput>
-            <Input
-              required
-              name="email"
-              value={email || ""}
-              onChange={this.handleInput}
-              placeholder=""
-            />
-          </Rectangle>
-
-          <Rectangle>
-            <LabelInput>CPF*</LabelInput>
-            <Input
-              required
-              name="cpf"
-              value={cpf || ""}
-              onChange={this.handleInput}
-              placeholder=""
-            />
-          </Rectangle>
+          {infoForm.map((input) => {
+            return (
+              <Rectangle key={input.name}>
+                <LabelInput key={input.label}>{input.label}</LabelInput>
+                <Input
+                  required
+                  name={input.name}
+                  type={input.type}
+                  pattern={input.pattern}
+                  title={input.title}
+                  placeholder={input.placeholder}
+                  value={this.state[input.name] || ""}
+                  onChange={this.handleInput}
+                />
+              </Rectangle>
+            );
+          })}
 
           <Button type="submit">Atualizar</Button>
         </Form>
@@ -68,8 +54,6 @@ class updateUserInfo extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-
-});
+const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(null, mapDispatchToProps)(updateUserInfo);
