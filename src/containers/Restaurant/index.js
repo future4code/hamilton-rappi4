@@ -2,7 +2,7 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import * as restaurantActions from "../../actions/restaurants";
 import { connect } from "react-redux";
-import { Main, MainRestaurant, WrapperProduct, WrapperImage, CardImage, TitleRestaurant } from "./styled";
+import { Main, MainRestaurant, WrapperDescription, WrapperImage, CardImage, TitleRestaurant } from "./styled";
 import CardsProducts from "../../components/CardsProducts"
 
 class Restaurant extends React.Component {
@@ -38,6 +38,8 @@ class Restaurant extends React.Component {
     this.setState({ currentRestaurant: restaurant })
   }
 
+
+
   render() {
 
     if (!this.state.currentRestaurant || !this.props.restaurantDetails) {
@@ -48,24 +50,31 @@ class Restaurant extends React.Component {
 
     return (
       <Main>
-        <h2>{name}</h2>
-        <MainRestaurant>
+          <MainRestaurant>
           <WrapperImage>
             <CardImage src={logoUrl} alt={name} />
           </WrapperImage>
           <TitleRestaurant>{name}</TitleRestaurant>
-          <p>{category}</p>
-          <p>{deliveryTime} min</p>
-          <span>
-            {shipping !== 0 ? `Frete: R$${shipping},00` : "Frete: Grátis"}
-          </span>
-          <p>{address}</p>
+          <WrapperDescription>
+            <p>{category}</p>
+            <p>{deliveryTime} min</p>
+            <p>
+              {shipping !== 0 ? `Frete: R$${shipping},00` : "Frete: Grátis"}
+            </p>
+            <p>{address}</p>
+          </WrapperDescription>
         </MainRestaurant>
+
+
         <section>
-          {this.props.restaurantDetails.map(product => {
-            return <>
-              <CardsProducts key={product.id} product={product} />
-            </>
+          {this.props.restaurantDetails.map(([category, products]) => {
+            return <React.Fragment key={category}>
+            <h3> {category} </h3>
+            <hr/>  
+            {products.map(product => { 
+              return <CardsProducts key={product.id} product={product} />
+            })}
+            </React.Fragment>
           })}
         </section>
 
@@ -84,4 +93,3 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(restaurantActions, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Restaurant);
-

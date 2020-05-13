@@ -10,7 +10,8 @@ import {
   WrapperSearch,
   InputIcon,
   WrapperCategory,
-  ViewCategories
+  ViewCategories,
+  Category
 } from "./styled";
 import SearchIcon from "../../img/search.svg";
 
@@ -88,17 +89,18 @@ class Home extends React.Component {
           <div>
             <ViewCategories>
             <WrapperCategory>
-              <div onClick={() => this.handleCategory("")} key={""}>
+              <Category selected={this.state.category === ""} onClick={() => this.handleCategory("")} key={""}>
                Todos
-              </div>
+              </Category>
               {allCategories.map((category) => {
                 return (
-                  <div
+                  <Category
+                    selected={this.state.category === category}
                     onClick={() => this.handleCategory(category)}
                     key={category}
                   >
                     {category}
-                  </div>
+                  </Category>
                 );
               })}
             </WrapperCategory>

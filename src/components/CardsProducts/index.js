@@ -1,5 +1,5 @@
 import React from "react";
-import { Main, WrapperImg, ProductImg, WrapperDetails, TitleProduct, DescriptionProduct, PriceProduct} from "./styled"
+import { Main, WrapperImg, ProductImg, WrapperDetails, TitleProduct, DescriptionProduct, PriceProduct, ButtonProduct, Quantity} from "./styled"
 
 class CardsProducts extends React.Component {
     render() {
@@ -14,6 +14,8 @@ class CardsProducts extends React.Component {
                 <TitleProduct> {name} </TitleProduct>
                 <DescriptionProduct> {description} </DescriptionProduct>
                 <PriceProduct> R$ {price} </PriceProduct>
+                <Quantity>0</Quantity>
+                <ButtonProduct>Adicionar</ButtonProduct>
             </WrapperDetails>
 
         </Main>

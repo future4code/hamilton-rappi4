@@ -42,8 +42,10 @@ export const ViewCategories = styled.div`
   overflow-x: auto;
   position: relative;
   width: 100%;
-  height: 50px;
-`;
+  height: 70px;
+  margin-bottom: 15px;
+`
+
 export const WrapperCategory = styled.div`
   display: flex;
   position: absolute;
@@ -52,8 +54,12 @@ export const WrapperCategory = styled.div`
 
   div + div {
     margin-left: 16px;
-    
-    
-    
   }
 `;
+
+export const Category = styled.div` 
+  color: ${
+    props => props.selected ? "#e86e5a" : "black"
+  };
+
+`

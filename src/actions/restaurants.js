@@ -11,7 +11,6 @@ export const setAllRestaurants =(restaurants)=>{
             restaurants
         }
     }
-
 } 
 
 export const setRestaurantDetails =(detail)=> {
@@ -21,11 +20,7 @@ export const setRestaurantDetails =(detail)=> {
             detail
         }
     }
-
-
 }
-
-// ASSINCRONAS 
 
 export const getRestaurants=()=> async (dispatch)=> {
 
@@ -61,11 +56,8 @@ export const getRestaurantsDetails =(restaurantId)=> async(dispatch)=>{
                 }
             })
             dispatch(setRestaurantDetails(response.data.restaurant.products))
-            console.log(response.data.restaurant.products)
     }catch (error){
         console.error(error)
 
     }
-
-
 }
