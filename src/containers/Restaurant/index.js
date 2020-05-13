@@ -2,7 +2,8 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import * as restaurantActions from "../../actions/restaurants";
 import { connect } from "react-redux";
-import { CardImage, Main } from "./styled";
+import { Main, MainRestaurant, WrapperProduct, WrapperImage, CardImage, TitleRestaurant } from "./styled";
+import CardsProducts from "../../components/CardsProducts"
 
 class Restaurant extends React.Component {
   state = {
@@ -11,23 +12,27 @@ class Restaurant extends React.Component {
 
 
   componentDidMount() {
-    if(this.props.restaurants.length === 0) {
+    const restaurantId = this.props.match.params.id
+
+    if (this.props.restaurants.length === 0) {
       this.props.getRestaurants();
     } else {
       this.setCurrentRestaurant()
     }
+
+    this.props.getRestaurantsDetails(restaurantId)
   }
-  
+
   componentDidUpdate() {
-    if(this.props.restaurants.length > 0 && !this.state.currentRestaurant) {
-     this.setCurrentRestaurant()
+    if (this.props.restaurants.length > 0 && !this.state.currentRestaurant) {
+      this.setCurrentRestaurant()
     }
   }
 
   setCurrentRestaurant = () => {
     const restaurantId = this.props.match.params.id
     const restaurant = this.props.restaurants.find(restaurant => {
-    return restaurant.id === restaurantId
+      return restaurant.id === restaurantId
     })
 
     this.setState({ currentRestaurant: restaurant })
@@ -35,30 +40,36 @@ class Restaurant extends React.Component {
 
   render() {
 
-    if (!this.state.currentRestaurant) {
+    if (!this.state.currentRestaurant || !this.props.restaurantDetails) {
       return <div>Loading</div>
     }
 
     const { name, address, shipping, deliveryTime, logoUrl, category } = this.state.currentRestaurant
 
-
     return (
-      <div>
+      <Main>
         <h2>{name}</h2>
-        <Main>
-          <div>
+        <MainRestaurant>
+          <WrapperImage>
             <CardImage src={logoUrl} alt={name} />
-          </div>
-          <h5>{name}</h5>
+          </WrapperImage>
+          <TitleRestaurant>{name}</TitleRestaurant>
           <p>{category}</p>
           <p>{deliveryTime} min</p>
           <span>
             {shipping !== 0 ? `Frete: R$${shipping},00` : "Frete: Grátis"}
           </span>
           <p>{address}</p>
-        </Main>
+        </MainRestaurant>
+        <section>
+          {this.props.restaurantDetails.map(product => {
+            return <>
+              <CardsProducts key={product.id} product={product} />
+            </>
+          })}
+        </section>
 
-      </div>
+      </Main>
     );
   }
 }

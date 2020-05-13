@@ -1,4 +1,7 @@
 import React from "react";
+import { connect } from "react-redux"
+import { routes } from '../../containers/Router'
+import { push } from "connected-react-router"
 import { CardImage, Main, DeliveryInfo } from "./styled";
 
 class Cards extends React.Component {
@@ -25,6 +28,9 @@ class Cards extends React.Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  goToRestaurantDetails: (restaurantId) => dispatch(push(routes.restaurant.replace(":id", restaurantId)))
+})
 
 
-export default Cards;
+export default connect(null, mapDispatchToProps)(Cards)

@@ -11,6 +11,7 @@ const restaurants = (state =  initialState, action) =>{
             return {...state, restaurants:action.payload.restaurants}
 
         case "SET_RESTAURANT_DETAILS":
+            console.log(action.payload.detail)
             return {...state, restaurantDetails:action.payload.detail}
         
         default:

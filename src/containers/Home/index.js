@@ -46,11 +46,6 @@ class Home extends React.Component {
     });
   };
 
-  goToRestaurantDetails = (restaurantId)=> {
-    this.props.getRestaurantsDetails(restaurantId)
-
-  }
-
   render() {
     const filterRestaurants = this.props.restaurants.filter((restaurant) => {
       const search = this.state.findRestaurant.toLowerCase();
@@ -111,7 +106,7 @@ class Home extends React.Component {
 
             {filterRestaurants.length > 0 ? (
               filterRestaurants.map((restaurant) => {
-                return <Cards key={restaurant.id} restaurant={restaurant} goToRestaurantDetails={this.goToRestaurantDetails} />;
+                return <Cards key={restaurant.id} restaurant={restaurant} />;
               })
             ) : (
               <p>Não encontramos =(</p>

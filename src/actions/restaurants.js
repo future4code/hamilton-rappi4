@@ -62,7 +62,6 @@ export const getRestaurantsDetails =(restaurantId)=> async(dispatch)=>{
             })
             dispatch(setRestaurantDetails(response.data.restaurant.products))
             console.log(response.data.restaurant.products)
-            dispatch(push(routes.restaurant.replace(":id", restaurantId)))
     }catch (error){
         console.error(error)
 
