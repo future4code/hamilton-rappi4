@@ -11,7 +11,6 @@ export const setAllRestaurants =(restaurants)=>{
             restaurants
         }
     }
-
 } 
 
 export const setRestaurantDetails =(detail)=> {
@@ -21,15 +20,11 @@ export const setRestaurantDetails =(detail)=> {
             detail
         }
     }
-
-
 }
-
-// ASSINCRONAS 
 
 export const getRestaurants=()=> async (dispatch)=> {
 
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InpKdUJlVnVEbDBZNExpdmhBRVp3IiwibmFtZSI6IkNhenV6YSIsImVtYWlsIjoiY2F6dXphQG1haWwuY29tIiwiY3BmIjoiMTI0LjQ1Ni43ODktMTAiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUi4gQWZvbnNvIEJyYXosIDE3NywgNzEgLSBWaWxhIE4uIENvbmNlacOnw6NvIiwiaWF0IjoxNTg5MjA5Mzc0fQ.nKjwk_E8LrBYwLHd2t30gbxsuOghDD0RRcuSE8kt7FU" 
+    const token = localStorage.getItem("token")
 
     try {
         const response = await axios.get(
@@ -50,7 +45,7 @@ export const getRestaurants=()=> async (dispatch)=> {
 
 export const getRestaurantsDetails =(restaurantId)=> async(dispatch)=>{
 
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InpKdUJlVnVEbDBZNExpdmhBRVp3IiwibmFtZSI6IkNhenV6YSIsImVtYWlsIjoiY2F6dXphQG1haWwuY29tIiwiY3BmIjoiMTI0LjQ1Ni43ODktMTAiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUi4gQWZvbnNvIEJyYXosIDE3NywgNzEgLSBWaWxhIE4uIENvbmNlacOnw6NvIiwiaWF0IjoxNTg5MjA5Mzc0fQ.nKjwk_E8LrBYwLHd2t30gbxsuOghDD0RRcuSE8kt7FU" 
+    const token = localStorage.getItem("token") 
     
     try {
         const response = await axios.get(
@@ -61,12 +56,8 @@ export const getRestaurantsDetails =(restaurantId)=> async(dispatch)=>{
                 }
             })
             dispatch(setRestaurantDetails(response.data.restaurant.products))
-            console.log(response.data.restaurant.products)
-            dispatch(push(routes.restaurant.replace(":id", restaurantId)))
     }catch (error){
         console.error(error)
 
     }
-
-
 }

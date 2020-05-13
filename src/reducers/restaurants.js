@@ -9,10 +9,26 @@ const restaurants = (state = initialState, action) => {
       return { ...state, restaurants: action.payload.restaurants };
 
     case "SET_RESTAURANT_DETAILS":
-      return { ...state, restaurantDetails: action.payload.detail };
 
-    default:
-      return state;
-  }
-};
-export default restaurants;
+            let sortedProducts = {}
+
+            action.payload.detail.forEach(product => {
+
+                if(!sortedProducts.hasOwnProperty(product.category)) {
+                    sortedProducts[product.category] = []
+                }
+
+                sortedProducts[product.category].push(product)
+
+            })
+            sortedProducts = Object.entries(sortedProducts)
+
+            return {...state, restaurantDetails: sortedProducts}
+        
+        default:
+            return state
+
+    }      
+}
+
+export default restaurants

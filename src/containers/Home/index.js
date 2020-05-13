@@ -11,7 +11,8 @@ import {
   WrapperSearch,
   InputIcon,
   WrapperCategory,
-  ViewCategories
+  ViewCategories,
+  Category
 } from "./styled";
 import SearchIcon from "../../img/search.svg";
 
@@ -46,11 +47,6 @@ class Home extends React.Component {
       category: this.state.category === category ? "" : category,
     });
   };
-
-  goToRestaurantDetails = (restaurantId)=> {
-    this.props.getRestaurantsDetails(restaurantId)
-
-  }
 
   render() {
     const filterRestaurants = this.props.restaurants.filter((restaurant) => {
@@ -94,17 +90,18 @@ class Home extends React.Component {
           <div>
             <ViewCategories>
             <WrapperCategory>
-              <div onClick={() => this.handleCategory("")} key={""}>
+              <Category selected={this.state.category === ""} onClick={() => this.handleCategory("")} key={""}>
                Todos
-              </div>
+              </Category>
               {allCategories.map((category) => {
                 return (
-                  <div
+                  <Category
+                    selected={this.state.category === category}
                     onClick={() => this.handleCategory(category)}
                     key={category}
                   >
                     {category}
-                  </div>
+                  </Category>
                 );
               })}
             </WrapperCategory>
@@ -112,7 +109,7 @@ class Home extends React.Component {
 
             {filterRestaurants.length > 0 ? (
               filterRestaurants.map((restaurant) => {
-                return <Cards key={restaurant.id} restaurant={restaurant} goToRestaurantDetails={this.goToRestaurantDetails} />;
+                return <Cards key={restaurant.id} restaurant={restaurant} />;
               })
             ) : (
               <p>Não encontramos =(</p>
