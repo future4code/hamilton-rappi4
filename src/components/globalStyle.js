@@ -1,4 +1,8 @@
-import styled from "styled-components"
+import styled from "styled-components";
+
+export const Loader = styled.div`
+  text-align: center;
+`;
 
 export const Wrapper = styled.div`
   display: flex;
@@ -74,33 +78,33 @@ export const Text = styled.p`
   color: #000;
 `;
 
-export const WrapperProfile = styled.div `
-  font-family: 'Roboto', sans-serif;
-  hr{
+export const WrapperProfile = styled.div`
+  font-family: "Roboto", sans-serif;
+  hr {
     width: 328px;
   }
-`
+`;
 
-export const CustomDiv = styled.div `
+export const CustomDiv = styled.div`
   margin-left: 16px;
-  img{
+  img {
     float: right;
     margin-right: 16px;
   }
-`
+`;
 
-export const DarkDiv = styled.div `
+export const DarkDiv = styled.div`
   background-color: #eeeeee;
   padding: 16px;
   height: 90px;
-  span{
+  span {
     color: #b8b8b8;
   }
-  img{
+  img {
     float: right;
   }
-`
+`;
 
-export const TextProfile = styled.p `
+export const TextProfile = styled.p`
   margin-left: 16px;
-`
+`;

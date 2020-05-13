@@ -1,10 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
-import { push } from "connected-react-router";
-import { routes } from "../Router";
 import { addAddress } from "../../actions/authentication";
 import Header from "../../components/Header/Header";
-import { Wrapper, Form, Rectangle, Button, Input, LabelInput, Text} from "../../components/globalStyle"
+import {
+  Wrapper,
+  Form,
+  Rectangle,
+  Button,
+  Input,
+  LabelInput,
+  Text,
+} from "../../components/globalStyle";
+import { addressForm } from "../../components/globalForms";
 
 class Address extends React.Component {
   state = {};
@@ -18,89 +25,34 @@ class Address extends React.Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
 
-    this.props.addAddress(this.state)
+    this.props.addAddress(this.state);
   };
-  render() {
-    const {
-      street,
-      number,
-      complement,
-      neighbourhood,
-      city,
-      state,
-    } = this.state;
 
+  render() {
     return (
       <Wrapper>
-        <Header goBack={true}/>
+        <Header goBack={true} />
 
         <Text>Meu endereço</Text>
 
         <Form onSubmit={this.handleFormSubmit}>
-          <Rectangle>
-            <LabelInput>Logradouro*</LabelInput>
-            <Input
-              required
-              name="street"
-              value={street || ""}
-              onChange={this.handleInput}
-              placeholder="Rua / Av."
-            />
-          </Rectangle>
-
-          <Rectangle>
-            <LabelInput>Número*</LabelInput>
-            <Input
-              required
-              name="number"
-              value={number || ""}
-              onChange={this.handleInput}
-              placeholder="Número"
-            />
-          </Rectangle>
-
-          <Rectangle>
-            <LabelInput>Complemento</LabelInput>
-            <Input
-              name="complement"
-              value={complement || ""}
-              onChange={this.handleInput}
-              placeholder="Apto. / Bloco"
-            />
-          </Rectangle>
-
-          <Rectangle>
-            <LabelInput>Bairro*</LabelInput>
-            <Input
-              required
-              name="neighbourhood"
-              value={neighbourhood || ""}
-              onChange={this.handleInput}
-              placeholder="Bairro"
-            />
-          </Rectangle>
-
-          <Rectangle>
-            <LabelInput>Cidade*</LabelInput>
-            <Input
-              required
-              name="city"
-              value={city || ""}
-              onChange={this.handleInput}
-              placeholder="Cidade"
-            />
-          </Rectangle>
-
-          <Rectangle>
-            <LabelInput>Estado*</LabelInput>
-            <Input
-              required
-              name="state"
-              value={state || ""}
-              onChange={this.handleInput}
-              placeholder="Estado"
-            />
-          </Rectangle>
+          {addressForm.map((input) => {
+            return (
+              <Rectangle key={input.name}>
+                <LabelInput key={input.label}>{input.label}</LabelInput>
+                <Input
+                  required
+                  name={input.name}
+                  type={input.type}
+                  pattern={input.pattern}
+                  title={input.title}
+                  placeholder={input.placeholder}
+                  value={this.state[input.name] || ""}
+                  onChange={this.handleInput}
+                />
+              </Rectangle>
+            );
+          })}
 
           <Button type="submit">Salvar</Button>
         </Form>

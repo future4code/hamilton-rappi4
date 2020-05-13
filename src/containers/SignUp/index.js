@@ -6,7 +6,16 @@ import { push } from "connected-react-router";
 import { routes } from "../Router";
 import { signUp } from "../../actions/authentication";
 import Header from "../../components/Header/Header";
-import { Wrapper, Form, Rectangle, Button, Input, LabelInput, Text} from "../../components/globalStyle"
+import {
+  Wrapper,
+  Form,
+  Rectangle,
+  Button,
+  Input,
+  LabelInput,
+  Text,
+} from "../../components/globalStyle";
+import { signUpForm } from "../../components/globalForms";
 
 const ImgLogo = styled.img`
   margin-top: 48px;
@@ -30,76 +39,35 @@ class SignUp extends React.Component {
     } else {
       // this.props.signUp(name, email, cpf, password);
       // this.props.goToAddress();
+      console.log(this.state);
     }
   };
 
   render() {
-    const { name, email, cpf, password, confirmPassword } = this.state;
-
     return (
       <Wrapper>
-        <Header goBack={true}/>
+        <Header goBack={true} />
         <ImgLogo src={logo} />
 
         <Text>Cadastrar</Text>
         <Form onSubmit={this.handleFormSubmit}>
-          <Rectangle>
-            <LabelInput>Nome*</LabelInput>
-            <Input
-              required
-              name="name"
-              value={name || ""}
-              onChange={this.handleInput}
-              placeholder="Nome e sobrenome"
-            />
-          </Rectangle>
-
-          <Rectangle>
-            <LabelInput>E-mail*</LabelInput>
-            <Input
-              required
-              name="email"
-              type="email"
-              value={email || ""}
-              onChange={this.handleInput}
-              placeholder="email@email.com"
-            />
-          </Rectangle>
-
-          <Rectangle>
-            <LabelInput>CPF*</LabelInput>
-            <Input
-              required
-              name="cpf"
-              value={cpf || ""}
-              onChange={this.handleInput}
-              placeholder="000.000.000.00"
-            />
-          </Rectangle>
-
-          <Rectangle>
-            <LabelInput>Senha*</LabelInput>
-            <Input
-              required
-              name="password"
-              type="password"
-              value={password || ""}
-              onChange={this.handleInput}
-              placeholder="Mínimo de 6 caracteres"
-            />
-          </Rectangle>
-
-          <Rectangle>
-            <LabelInput>Confirmar*</LabelInput>
-            <Input
-              required
-              name="confirmPassword"
-              type="password"
-              value={confirmPassword || ""}
-              onChange={this.handleInput}
-              placeholder="Confirme a senha anterior"
-            />
-          </Rectangle>
+          {signUpForm.map((input) => {
+            return (
+              <Rectangle key={input.name}>
+                <LabelInput key={input.label}>{input.label}</LabelInput>
+                <Input
+                  required
+                  name={input.name}
+                  type={input.type}
+                  pattern={input.pattern}
+                  title={input.title}
+                  placeholder={input.placeholder}
+                  value={this.state[input.name] || ""}
+                  onChange={this.handleInput}
+                />
+              </Rectangle>
+            );
+          })}
 
           <Button type="submit">Criar</Button>
         </Form>
