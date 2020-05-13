@@ -81,9 +81,7 @@ class Footer extends React.Component {
         return (
             <WrapperFooter>
                 <img src={iconHome} onClick={() => this.props.goToHome()} />
-                
-                <img src={iconCart} />
-                
+                <img src={iconCart} onClick={() => this.props.goToCart()}/>
                 <img src={iconAvatar} onClick={() => this.props.goToUserInfo()} />                
             </WrapperFooter>
         )
@@ -93,9 +91,7 @@ class Footer extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
     goToHome: () => dispatch(push(routes.home)),
-    
-    // Criar goToCart
-    
+    goToCart: () => dispatch(push(routes.cart)),
     goToUserInfo: () => dispatch(push(routes.profile))
 })
 
