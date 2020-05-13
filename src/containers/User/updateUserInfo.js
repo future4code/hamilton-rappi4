@@ -10,6 +10,7 @@ import {
   LabelInput,
 } from "../../components/globalStyle";
 import { infoForm } from "../../components/globalForms";
+import { updateInfo } from "../../actions/profile"
 
 class updateUserInfo extends React.Component {
   state = {};
@@ -22,6 +23,8 @@ class updateUserInfo extends React.Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault();
+
+    this.props.updateInfo(this.state)
   };
   render() {
     return (
@@ -54,6 +57,8 @@ class updateUserInfo extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  updateInfo: (state) => dispatch(updateInfo(state))
+});
 
 export default connect(null, mapDispatchToProps)(updateUserInfo);

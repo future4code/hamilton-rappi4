@@ -9,8 +9,8 @@ import {
   Input,
   LabelInput,
 } from "../../components/globalStyle";
-import { updateUser } from "../../actions/profile";
 import { addressForm } from "../../components/globalForms";
+import { updateAddress } from "../../actions/profile"
 
 class updateUserAddress extends React.Component {
   state = {};
@@ -24,7 +24,7 @@ class updateUserAddress extends React.Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
 
-    this.props.updateAddress(this.state);
+    this.props.updateAddress(this.state)
   };
 
   render() {
@@ -38,7 +38,7 @@ class updateUserAddress extends React.Component {
               <Rectangle key={input.name}>
                 <LabelInput key={input.label}>{input.label}</LabelInput>
                 <Input
-                  required
+                  required = {input.required}
                   name={input.name}
                   type={input.type}
                   pattern={input.pattern}
@@ -59,7 +59,7 @@ class updateUserAddress extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  updateAddress: (state) => dispatch(updateUser(state)),
+  updateAddress: (state) => dispatch(updateAddress(state))
 });
 
 export default connect(null, mapDispatchToProps)(updateUserAddress);

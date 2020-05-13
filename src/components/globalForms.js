@@ -15,7 +15,7 @@ export const signUpForm = [
     },
     {
       name: "cpf",
-      type: "number",
+      type: "text",
       label: "CPF* ",
       placeholder: "000.000.000.00",
     },
@@ -41,12 +41,14 @@ export const signUpForm = [
       type: "text",
       label: "Logradouro* ",
       placeholder: "Rua / Av.",
+      required: true,
     },
     {
       name: "number",
       type: "number",
       label: "Número* ",
       placeholder: "Número",
+      required: true,
     },
     {
       name: "complement",
@@ -60,18 +62,21 @@ export const signUpForm = [
       type: "text",
       label: "Bairro* ",
       placeholder: "Bairro",
+      required: true,
     },
     {
       name: "city",
       type: "text",
       label: "Cidade* ",
       placeholder: "Cidade",
+      required: true,
     },
     {
       name: "state",
       type: "text",
       label: "Estado* ",
       placeholder: "Estado",
+      required: true,
     },
   ];
   
@@ -80,7 +85,6 @@ export const signUpForm = [
       name: "name",
       type: "text",
       label: "Nome* ",
-      pattern: "[A-Za-z çÇ]{3,}",
       title: "Mínimo 3 caracteres",
       placeholder: "Nome e Sobrenome",
     },
@@ -92,7 +96,7 @@ export const signUpForm = [
     },
     {
       name: "cpf",
-      type: "number",
+      type: "text",
       label: "CPF* ",
       placeholder: "000.000.000.00",
     },
