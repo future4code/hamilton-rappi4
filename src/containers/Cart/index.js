@@ -56,14 +56,7 @@ class Cart extends React.Component {
           </p>
         </DarkDiv>        
 
-        {ordersToString === "[]" || ordersToString === undefined ? (
-          <EmptyCartText>Carrinho vazio</EmptyCartText>
-        ) : (
-          this.props.orders.map((order) => {
-            return <p>{order}</p>;
-          })
-        )}
-          
+                  
           <Freight>Frete R$</Freight>
         <SubtotalDiv>
           <p>SUBTOTAL</p>

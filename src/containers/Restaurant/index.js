@@ -4,6 +4,7 @@ import * as restaurantActions from "../../actions/restaurants";
 import { connect } from "react-redux";
 import { Main, MainRestaurant, WrapperDescription, WrapperImage, CardImage, TitleRestaurant } from "./styled";
 import CardsProducts from "../../components/CardsProducts"
+import Footer from "../../components/Footer/Footer"
 
 class Restaurant extends React.Component {
   state = {
@@ -77,7 +78,7 @@ class Restaurant extends React.Component {
             </React.Fragment>
           })}
         </section>
-
+        <Footer isOnHome={true} />
       </Main>
     );
   }
