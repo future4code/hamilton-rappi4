@@ -25,10 +25,10 @@ class SignUp extends React.Component {
   state = {};
 
   componentDidMount() {
-    const token = localStorage.getItem("token")
-    
-    if(token !== null){
-      this.props.goToHomePage()
+    const token = localStorage.getItem("token");
+
+    if (token !== null) {
+      this.props.goToHomePage();
     }
   }
 
@@ -36,6 +36,17 @@ class SignUp extends React.Component {
     const { name, value } = e.target;
 
     this.setState({ [name]: value });
+
+    if (name === "cpf") {
+      let newCPF = e.target.value;
+
+      newCPF = newCPF.replace(/\D/g, "");
+      newCPF = newCPF.replace(/(\d{3})(\d)/, "$1.$2");
+      newCPF = newCPF.replace(/(\d{3})(\d)/, "$1.$2");
+      newCPF = newCPF.replace(/(\d{3})(\d{1,2})$/, "$1.$2");
+
+      if (newCPF.length < 15) this.setState({cpf: newCPF});
+    }
   };
 
   handleFormSubmit = (e) => {
@@ -71,6 +82,7 @@ class SignUp extends React.Component {
                   placeholder={input.placeholder}
                   value={this.state[input.name] || ""}
                   onChange={this.handleInput}
+                  maxLength= {input.maxLength}
                 />
               </Rectangle>
             );
@@ -89,7 +101,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   signUp: (name, email, cpf, password) =>
     dispatch(signUp(name, email, cpf, password)),
-  goToHomePage: () => dispatch(replace(routes.home))  
+  goToHomePage: () => dispatch(replace(routes.home)),
 });
 
 export default connect(null, mapDispatchToProps)(SignUp);
