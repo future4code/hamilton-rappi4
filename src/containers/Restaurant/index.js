@@ -2,7 +2,7 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import * as restaurantActions from "../../actions/restaurants";
 import { connect } from "react-redux";
-import { Main, MainRestaurant, WrapperDescription, WrapperImage, CardImage, TitleRestaurant } from "./styled";
+import { Main, MainRestaurant, WrapperDescription, WrapperImage, CardImage, TitleRestaurant} from "./styled";
 import CardsProducts from "../../components/CardsProducts"
 import Footer from "../../components/Footer/Footer"
 
@@ -39,8 +39,7 @@ class Restaurant extends React.Component {
     this.setState({ currentRestaurant: restaurant })
   }
 
-
-
+    
   render() {
 
     if (!this.state.currentRestaurant || !this.props.restaurantDetails) {
@@ -66,18 +65,18 @@ class Restaurant extends React.Component {
           </WrapperDescription>
         </MainRestaurant>
 
-
         <section>
           {this.props.restaurantDetails.map(([category, products]) => {
             return <React.Fragment key={category}>
             <h3> {category} </h3>
             <hr/>  
             {products.map(product => { 
-              return <CardsProducts key={product.id} product={product} />
+              return <CardsProducts key={product.id} product={product}/>
             })}
             </React.Fragment>
           })}
         </section>
+        
         <Footer isOnHome={true} />
       </Main>
     );

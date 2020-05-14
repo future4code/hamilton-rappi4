@@ -55,5 +55,3 @@ export const WrapperDescription = styled.div`
         }
     }
 `
-
-
