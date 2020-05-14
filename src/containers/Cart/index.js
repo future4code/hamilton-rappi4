@@ -1,27 +1,24 @@
 import React from "react";
 import { connect } from "react-redux";
-import { push, replace } from "connected-react-router";
+import { replace } from "connected-react-router";
 import { routes } from "../Router";
 import Header from "../../components/Header/Header";
-import Footer from '../../components/Footer/Footer';
+import Footer from "../../components/Footer/Footer";
 import {
   WrapperProfile,
   DarkDiv,
-  TextProfile,
   TextCard,
   PaymentDiv,
   SubtotalDiv,
   ButtonCart,
   EmptyCartText,
-  Freight
+  Freight,
 } from "../../components/globalStyle";
-import { getUserInfo, getOrdersHistory } from "../../actions/profile";
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
+import { getUserInfo } from "../../actions/profile";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
 
 class Cart extends React.Component {
   state = {};
@@ -29,21 +26,20 @@ class Cart extends React.Component {
   componentDidMount() {
     const token = localStorage.getItem("token");
     this.props.getUserInfo(token);
-    
-    if(token === null){
-      this.props.goToLogin()
+
+    if (token === null) {
+      this.props.goToLogin();
     }
   }
 
   handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    this.setState({ [name]: value });  
-  }
+    this.setState({ [name]: value });
+  };
 
   render() {
     const { user } = this.props;
-    const ordersToString = JSON.stringify(this.props.orders);
 
     return (
       <WrapperProfile>
@@ -51,44 +47,41 @@ class Cart extends React.Component {
 
         <DarkDiv>
           <span>Endereço de entrega</span>
-          <p>
-            {user && user.address}
-          </p>
-        </DarkDiv>        
+          <p>{user && user.address}</p>
+        </DarkDiv>
 
-        {ordersToString === "[]" || ordersToString === undefined ? (
-          <EmptyCartText>Carrinho vazio</EmptyCartText>
-        ) : (
-          this.props.orders.map((order) => {
-            return <p>{order}</p>;
-          })
-        )}
-          
-          <Freight>Frete R$</Freight>
+        <EmptyCartText>Carrinho vazio</EmptyCartText>
+        
+        <Freight>Frete R$</Freight>
         <SubtotalDiv>
           <p>SUBTOTAL</p>
           <p>R$</p>
         </SubtotalDiv>
 
         <TextCard>Forma de pagamento</TextCard>
-
         <hr />
 
         <PaymentDiv>
           <FormControl>
             <RadioGroup
-              name="paymentMethod"              
+              name="paymentMethod"
               value={this.state.value}
               onChange={this.handleInputChange}
             >
-              <FormControlLabel value="money" control={<Radio />} label="Dinheiro" />
-              <FormControlLabel value="creditcard" control={<Radio />} label="Cartão de Crédito" />
+              <FormControlLabel
+                value="money"
+                control={<Radio />}
+                label="Dinheiro"
+              />
+              <FormControlLabel
+                value="creditcard"
+                control={<Radio />}
+                label="Cartão de Crédito"
+              />
             </RadioGroup>
-          </FormControl>          
+          </FormControl>
           <ButtonCart>Confirmar</ButtonCart>
         </PaymentDiv>
-
-
         <Footer isOnCart={true} />
       </WrapperProfile>
     );
@@ -97,12 +90,11 @@ class Cart extends React.Component {
 
 const mapStateToProps = (state) => ({
   user: state.profiles.userInfo,
-  orders: state.profiles.orderHistory,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getUserInfo: (token) => dispatch(getUserInfo(token)),  
-  goToLogin: () => dispatch(replace(routes.login))
+  getUserInfo: (token) => dispatch(getUserInfo(token)),
+  goToLogin: () => dispatch(replace(routes.login)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

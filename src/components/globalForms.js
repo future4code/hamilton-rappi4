@@ -18,6 +18,7 @@ export const signUpForm = [
       type: "text",
       label: "CPF* ",
       placeholder: "000.000.000.00",
+      maxLength: 14
     },
     {
       name: "password",
@@ -99,6 +100,7 @@ export const signUpForm = [
       type: "text",
       label: "CPF* ",
       placeholder: "000.000.000-00",
+      maxLength: 14
     },
   ];
   
