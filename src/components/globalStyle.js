@@ -128,6 +128,7 @@ export const TextCard = styled.p `
 
 export const PaymentDiv = styled.div `
   margin-left: 16px;
+  height: 15vh;
 `
 
 export const SubtotalDiv = styled.div `
@@ -147,5 +148,4 @@ export const ButtonCart = styled.button`
   width: 328px;
   height: 42px;
   font-weight: bold;
-  margin-top: 115px;
 `;

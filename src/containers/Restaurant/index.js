@@ -79,7 +79,7 @@ class Restaurant extends React.Component {
             <h3> {category} </h3>
             <hr/>  
             {products.map(product => { 
-              return <CardsProducts key={product.id} product={product}/>
+              return <CardsProducts key={product.id} product={product} restaurantId={this.props.match.params.id} shipping={shipping} />
             })}
             </React.Fragment>
           })}

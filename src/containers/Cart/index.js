@@ -15,10 +15,12 @@ import {
   Freight,
 } from "../../components/globalStyle";
 import { getUserInfo } from "../../actions/profile";
+import { placeOrder } from "../../actions/cart"
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
+import CardsProducts from "../../components/CardsProducts";
 
 class Cart extends React.Component {
   state = {};
@@ -38,8 +40,26 @@ class Cart extends React.Component {
     this.setState({ [name]: value });
   };
 
+  handleOrder = () => {
+
+    const products = this.props.cartProduct.map(entries => ({
+      quantity: entries.quantity, id: entries.product.id
+    }))
+
+    console.log("No Cart", products, this.state.paymentMethod, this.props.restaurantId )
+
+
+    if(this.state.paymentMethod && this.props.restaurantId) {
+      this.props.placeOrder(products, this.state.paymentMethod, this.props.restaurantId)
+    }
+  }
+
   render() {
     const { user } = this.props;
+
+    const subTotal = this.props.cartProduct.reduce((total, product) => {
+      return product.quantity * product.product.price + total;
+    }, 0);
 
     return (
       <WrapperProfile>
@@ -50,14 +70,21 @@ class Cart extends React.Component {
           <p>{user && user.address}</p>
         </DarkDiv>
 
+        {this.props.cartProduct.length ? (
+          <div>
+            {this.props.cartProduct.map((product) => {
+              return <CardsProducts product={product.product} />;
+            })}
+          </div>
+        ) : (
+          <EmptyCartText>Carrinho vazio</EmptyCartText>
+        )}
 
-        <EmptyCartText>Carrinho vazio</EmptyCartText>
-        
-        <Freight>Frete R$</Freight>
+        {/* Add frete */}
 
         <SubtotalDiv>
           <p>SUBTOTAL</p>
-          <p>R$</p>
+          <p>R$ {subTotal} </p>
         </SubtotalDiv>
 
         <TextCard>Forma de pagamento</TextCard>
@@ -81,8 +108,8 @@ class Cart extends React.Component {
                 label="Cartão de Crédito"
               />
             </RadioGroup>
+            <ButtonCart onClick={this.handleOrder}>Confirmar</ButtonCart>
           </FormControl>
-          <ButtonCart>Confirmar</ButtonCart>
         </PaymentDiv>
         <Footer isOnCart={true} />
       </WrapperProfile>
@@ -92,11 +119,16 @@ class Cart extends React.Component {
 
 const mapStateToProps = (state) => ({
   user: state.profiles.userInfo,
+  cartProduct: state.cart.cart,
+  restaurantId: state.cart.restaurantId,
+  shipping: state.cart.shipping
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getUserInfo: (token) => dispatch(getUserInfo(token)),
   goToLogin: () => dispatch(replace(routes.login)),
+  placeOrder: (products, paymentMethod, restaurantId) =>
+    dispatch(placeOrder((products, paymentMethod, restaurantId))),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
