@@ -29,6 +29,17 @@ class updateUserInfo extends React.Component {
     const { name, value } = e.target;
 
     this.setState({ [name]: value });
+
+    if (name === "cpf") {
+      let newCPF = e.target.value;
+
+      newCPF = newCPF.replace(/\D/g, "");
+      newCPF = newCPF.replace(/(\d{3})(\d)/, "$1.$2");
+      newCPF = newCPF.replace(/(\d{3})(\d)/, "$1.$2");
+      newCPF = newCPF.replace(/(\d{3})(\d{1,2})$/, "$1.$2");
+
+      if (newCPF.length < 15) this.setState({cpf: newCPF});
+    }
   };
 
   handleFormSubmit = (e) => {
@@ -55,6 +66,7 @@ class updateUserInfo extends React.Component {
                   placeholder={input.placeholder}
                   value={this.state[input.name] || ""}
                   onChange={this.handleInput}
+                  maxLength= {input.maxLength}
                 />
               </Rectangle>
             );
