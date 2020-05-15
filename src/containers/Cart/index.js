@@ -50,9 +50,11 @@ class Cart extends React.Component {
           <p>{user && user.address}</p>
         </DarkDiv>
 
+
         <EmptyCartText>Carrinho vazio</EmptyCartText>
         
         <Freight>Frete R$</Freight>
+
         <SubtotalDiv>
           <p>SUBTOTAL</p>
           <p>R$</p>

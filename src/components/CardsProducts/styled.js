@@ -50,12 +50,13 @@ export const Quantity = styled.p`
     top: 0;
     right: 0;
     border-radius: 0 8px;
-    border: solid 1px black;
+    border: solid 1px #e86e5a;
     width: 33px;
     height: 33px;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #e86e5a;
 `
 
 export const ButtonProduct = styled.button` 
@@ -63,8 +64,37 @@ export const ButtonProduct = styled.button`
     bottom: 0;
     right: 0;
     border-radius: 8px 0;
-    border: solid 1px black;
+    border: solid 1px ${(props) => props.color ? props.color : "black"};
     width: 90px;
     height: 31px;
     background-color: white;
+    color: ${(props) => props.color ? props.color : "black"};
+`
+export const WrapperSelect = styled.div`
+    position: fixed;
+    z-index: 10;
+    align-self: center;
+    justify-self: center;
+    top: ${(props) => (props.isSelectOpen ? "220px" : 0)};
+    width: 90vw;
+    height: 20vh;
+    background-color: white;
+    transition: 0.5s;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+`
+
+export const Overlay = styled.div`
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 9;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    opacity: ${(props) => (props.isSelectOpen ? 0.8 : 0)};
+    pointer-events: ${(props) => (props.isSelectOpen ? "auto" : "none")};
+    transition: 0.5s;
 `

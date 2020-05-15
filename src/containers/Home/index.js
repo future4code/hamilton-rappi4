@@ -3,6 +3,8 @@ import Cards from "../../components/Cards";
 import { bindActionCreators } from "redux";
 import * as restaurantActions from "../../actions/restaurants";
 import { connect } from "react-redux";
+import { routes } from '../../containers/Router'
+import { replace } from 'connected-react-router'
 import Footer from '../../components/Footer/Footer';
 import {
   Title,
@@ -10,8 +12,10 @@ import {
   InputSearch,
   WrapperSearch,
   InputIcon,
+  LabelSearch,
   WrapperCategory,
   ViewCategories,
+  WrapperRestaurants,
   Category
 } from "./styled";
 import SearchIcon from "../../img/search.svg";
@@ -22,9 +26,14 @@ class Home extends React.Component {
     category: "",
     inputSearch: "",
     timeOut: null,
+    isSelected: false
   };
 
   componentDidMount() {
+    const token = localStorage.getItem("token")
+    if(!token) {
+      this.props.goToLogin()
+    }
     this.props.getRestaurants();
   }
 
@@ -78,12 +87,14 @@ class Home extends React.Component {
           
           <WrapperSearch>
             <InputIcon src={SearchIcon} />
-            <label htmlFor="find-restaurant">Restaurante</label>
+            <LabelSearch isSelected={this.state.isSelected} htmlFor="find-restaurant">Restaurante</LabelSearch>
             <InputSearch
               id="find-restaurant"
               onChange={this.handleInputSearch}
               type="text"
               value={this.state.inputSearch}
+              onFocus={() => this.setState({isSelected: true})}
+              onBlur={() => this.setState({isSelected: false})}
             ></InputSearch>
           </WrapperSearch>
 
@@ -106,7 +117,7 @@ class Home extends React.Component {
               })}
             </WrapperCategory>
           </ViewCategories>
-
+          <WrapperRestaurants> 
             {filterRestaurants.length > 0 ? (
               filterRestaurants.map((restaurant) => {
                 return <Cards key={restaurant.id} restaurant={restaurant} />;
@@ -114,6 +125,7 @@ class Home extends React.Component {
             ) : (
               <p>Não encontramos =(</p>
             )}
+          </WrapperRestaurants>
           </div>
         </div>
         <Footer isOnHome={true} />
@@ -127,6 +139,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(restaurantActions, dispatch);
+  bindActionCreators({...restaurantActions, goToLogin: () => replace(routes.login)}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
