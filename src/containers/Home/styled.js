@@ -16,21 +16,24 @@ export const WrapperSearch = styled.div`
   position: relative;
   width: 330px;
   height: 56px;
+`
 
-  label {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-40%);
-    left: 45px;
-    color: #d0d0d0;
-  }
-`;
 export const InputIcon = styled.img`
   position: absolute;
   left: 15px;
   top: 50%;
   transform: translateY(-50%);
 `;
+
+export const LabelSearch = styled.label`
+  position: absolute;
+  top: ${(props) => props.isSelected ? 0 : "50%" };
+  transform: translateY(-40%);
+  left: 45px;
+  color: #d0d0d0;
+  user-select: none;
+`
+
 export const InputSearch = styled.input`
   height: 100%;
   width: 100%;
@@ -43,7 +46,7 @@ export const ViewCategories = styled.div`
   position: relative;
   width: 100%;
   height: 70px;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 `
 
 export const WrapperCategory = styled.div`
@@ -56,6 +59,10 @@ export const WrapperCategory = styled.div`
     margin-left: 16px;
   }
 `;
+
+export const WrapperRestaurants = styled.div` 
+  margin-bottom: 80px;
+`
 
 export const Category = styled.div` 
   color: ${

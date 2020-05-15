@@ -2,7 +2,9 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import * as restaurantActions from "../../actions/restaurants";
 import { connect } from "react-redux";
-import { Main, MainRestaurant, WrapperDescription, WrapperImage, CardImage, TitleRestaurant} from "./styled";
+import { routes } from '../../containers/Router'
+import { replace } from 'connected-react-router'
+import { Main, MainRestaurant, WrapperDescription, WrapperImage, CardImage, TitleRestaurant, WrapperProduct} from "./styled";
 import CardsProducts from "../../components/CardsProducts"
 import Footer from "../../components/Footer/Footer"
 
@@ -13,13 +15,19 @@ class Restaurant extends React.Component {
 
 
   componentDidMount() {
+    const token = localStorage.getItem("token")
+    if(!token) {
+      this.props.goToLogin()
+    }
+    
     const restaurantId = this.props.match.params.id
-
+    
     if (this.props.restaurants.length === 0) {
       this.props.getRestaurants();
     } else {
       this.setCurrentRestaurant()
     }
+
 
     this.props.getRestaurantsDetails(restaurantId)
   }
@@ -65,7 +73,7 @@ class Restaurant extends React.Component {
           </WrapperDescription>
         </MainRestaurant>
 
-        <section>
+        <WrapperProduct>
           {this.props.restaurantDetails.map(([category, products]) => {
             return <React.Fragment key={category}>
             <h3> {category} </h3>
@@ -75,7 +83,7 @@ class Restaurant extends React.Component {
             })}
             </React.Fragment>
           })}
-        </section>
+        </WrapperProduct>
         
         <Footer isOnHome={true} />
       </Main>
@@ -90,6 +98,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(restaurantActions, dispatch);
+  bindActionCreators({...restaurantActions, goToLogin: () => replace(routes.login)}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Restaurant);

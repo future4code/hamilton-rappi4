@@ -55,3 +55,7 @@ export const WrapperDescription = styled.div`
         }
     }
 `
+
+export const WrapperProduct = styled.section`
+    margin-bottom: 40px;
+`

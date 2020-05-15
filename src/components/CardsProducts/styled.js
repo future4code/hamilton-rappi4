@@ -64,10 +64,11 @@ export const ButtonProduct = styled.button`
     bottom: 0;
     right: 0;
     border-radius: 8px 0;
-    border: solid 1px black;
+    border: solid 1px ${(props) => props.color ? props.color : "black"};
     width: 90px;
     height: 31px;
     background-color: white;
+    color: ${(props) => props.color ? props.color : "black"};
 `
 export const WrapperSelect = styled.div`
     position: fixed;
