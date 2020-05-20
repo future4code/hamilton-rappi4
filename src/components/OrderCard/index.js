@@ -6,7 +6,7 @@ function OrderCard(props) {
         <WrapperOrderCard>
             <Title>{props.restaurant}</Title>
             <Date>{props.date}</Date>
-            <Price>SUBTOTAL R${props.totalPrice},00</Price>
+            <Price>SUBTOTAL R${props.totalPrice}</Price>
         </WrapperOrderCard>
     )
 }

@@ -46,7 +46,7 @@ class CardsProducts extends React.Component {
         <WrapperDetails>
           <TitleProduct> {name} </TitleProduct>
           <DescriptionProduct> {description} </DescriptionProduct>
-          <PriceProduct> R$ {price} </PriceProduct>
+          <PriceProduct> R$ {price.toFixed(2)} </PriceProduct>
           {cartProduct && <Quantity> {cartProduct.quantity} </Quantity>}
           {cartProduct ? (
             <ButtonProduct color="#e86e5a" onClick={() => this.props.removeProduct(id)}>Remover</ButtonProduct>
@@ -72,6 +72,7 @@ class CardsProducts extends React.Component {
             </select>
             <button
               onClick={() => {
+                if(!this.state.selectQuantity) return;
                 this.props.addToCart(
                   this.state.selectQuantity,
                   this.props.product,

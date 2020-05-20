@@ -62,7 +62,7 @@ class Profile extends React.Component {
               <OrderCard 
                 restaurant={order.restaurantName}
                 date={"13 de Maio de 2020"}
-                totalPrice={order.totalPrice}
+                totalPrice={order.totalPrice.toFixed(2)}
               />
             )
           })          
