@@ -17,7 +17,7 @@ class Cards extends React.Component {
           <h5>{name}</h5>
           <p>{deliveryTime}min</p>
           <p>
-            {shipping !== 0 ? `Frete: R$${shipping},00` : "Frete: Grátis"}
+            {shipping !== 0 ? `Frete: R$${shipping.toFixed(2)}` : "Frete: Grátis"}
           </p>
         </DeliveryInfo>
       </Main>

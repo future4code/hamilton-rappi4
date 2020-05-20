@@ -67,7 +67,7 @@ class Restaurant extends React.Component {
             <p>{category}</p>
             <p>{deliveryTime} min</p>
             <p>
-              {shipping !== 0 ? `Frete: R$${shipping},00` : "Frete: Grátis"}
+              {shipping !== 0 ? `Frete: R$${shipping.toFixed(2)}` : "Frete: Grátis"}
             </p>
             <p>{address}</p>
           </WrapperDescription>
@@ -79,7 +79,7 @@ class Restaurant extends React.Component {
             <h3> {category} </h3>
             <hr/>  
             {products.map(product => { 
-              return <CardsProducts key={product.id} product={product}/>
+              return <CardsProducts key={product.id} product={product} restaurantId={this.props.match.params.id} shipping={shipping} />
             })}
             </React.Fragment>
           })}

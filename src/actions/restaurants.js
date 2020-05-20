@@ -53,6 +53,7 @@ export const getRestaurantsDetails =(restaurantId)=> async(dispatch)=>{
                     auth:token
                 }
             })
+
             dispatch(setRestaurantDetails(response.data.restaurant.products))
     }catch (error){
         console.error(error)

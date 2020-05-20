@@ -118,6 +118,13 @@ export const DarkDiv = styled.div`
   }
 `;
 
+export const WrapperProducts = styled.div` 
+  padding: 0 15px;
+  *{
+    margin: 0;
+  }
+`
+
 export const TextProfile = styled.p`
   margin-left: 16px;
 `;
@@ -128,6 +135,12 @@ export const TextCard = styled.p `
 
 export const PaymentDiv = styled.div `
   margin-left: 16px;
+  margin-bottom: 80px;
+`
+export const Shipping = styled.p` 
+  width: 100%;
+  text-align: right;
+  padding-right: 15px;
 `
 
 export const SubtotalDiv = styled.div `
@@ -147,5 +160,4 @@ export const ButtonCart = styled.button`
   width: 328px;
   height: 42px;
   font-weight: bold;
-  margin-top: 115px;
 `;

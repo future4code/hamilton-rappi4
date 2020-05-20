@@ -70,3 +70,26 @@ export const Category = styled.div`
   };
 
 `
+
+export const WrapperActiveOrder = styled.div` 
+  position: fixed;
+  bottom: 51px;
+  background-color: #e86e5a;
+  width: 100vw;
+  padding: 25px;
+  display: flex;
+  *{
+    margin: 0;
+  }
+`
+
+export const WrapperOrderInfo = styled.div` 
+  margin-left: 25px;
+  p {
+    margin: 5px 0;
+  }
+  p:first-child {
+    color: white;
+  }
+
+`

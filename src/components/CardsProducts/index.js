@@ -37,6 +37,7 @@ class CardsProducts extends React.Component {
       (product) => product.product.id === id
     );
 
+
     return (
       <Main>
         <WrapperImg>
@@ -45,7 +46,7 @@ class CardsProducts extends React.Component {
         <WrapperDetails>
           <TitleProduct> {name} </TitleProduct>
           <DescriptionProduct> {description} </DescriptionProduct>
-          <PriceProduct> R$ {price} </PriceProduct>
+          <PriceProduct> R$ {price.toFixed(2)} </PriceProduct>
           {cartProduct && <Quantity> {cartProduct.quantity} </Quantity>}
           {cartProduct ? (
             <ButtonProduct color="#e86e5a" onClick={() => this.props.removeProduct(id)}>Remover</ButtonProduct>
@@ -57,6 +58,7 @@ class CardsProducts extends React.Component {
           <WrapperSelect isSelectOpen={this.state.isSelectOpen}>
             <label>Selecione a quantidade desejada</label>
             <select onChange={this.handleSelect}>
+              <option disabled selected> Selecione </option>
               <option value={1}> 1 </option>
               <option value={2}> 2 </option>
               <option value={3}> 3 </option>
@@ -70,9 +72,12 @@ class CardsProducts extends React.Component {
             </select>
             <button
               onClick={() => {
+                if(!this.state.selectQuantity) return;
                 this.props.addToCart(
                   this.state.selectQuantity,
-                  this.props.product
+                  this.props.product,
+                  this.props.restaurantId,
+                  this.props.shipping
                 ); 
                 this.toggleSelect()
               }}
