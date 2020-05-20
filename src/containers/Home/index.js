@@ -35,8 +35,9 @@ class Home extends React.Component {
 
   componentDidMount() {
     const token = localStorage.getItem("token");
-    if (!token) {
-      this.props.goToLogin();
+    if (token === null) {
+      this.props.goToLogin() 
+      return;
     }
     this.props.getRestaurants();
     this.props.getActiveOrder()
@@ -136,6 +137,7 @@ class Home extends React.Component {
                   return <Cards key={restaurant.id} restaurant={restaurant} />;
                 })
               ) : (
+               !this.props.isLoading &&
                 <p>Não encontramos =(</p>
               )}
             </WrapperRestaurants>
@@ -163,6 +165,7 @@ class Home extends React.Component {
 const mapStateToProps = (state) => ({
   restaurants: state.restaurants.restaurants,
   order: state.cart.order,
+  isLoading: state.restaurants.isLoading
 });
 
 const mapDispatchToProps = (dispatch) =>
