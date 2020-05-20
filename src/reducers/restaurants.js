@@ -1,6 +1,7 @@
 const initialState = {
   restaurants: [],
   restaurantDetails: null,
+  isLoading: false,
 };
 
 const restaurants = (state = initialState, action) => {
@@ -9,26 +10,26 @@ const restaurants = (state = initialState, action) => {
       return { ...state, restaurants: action.payload.restaurants };
 
     case "SET_RESTAURANT_DETAILS":
+      let sortedProducts = {};
 
-            let sortedProducts = {}
+      action.payload.detail.forEach((product) => {
+        if (!sortedProducts.hasOwnProperty(product.category)) {
+          sortedProducts[product.category] = [];
+        }
 
-            action.payload.detail.forEach(product => {
+        sortedProducts[product.category].push(product);
+      });
+      sortedProducts = Object.entries(sortedProducts);
 
-                if(!sortedProducts.hasOwnProperty(product.category)) {
-                    sortedProducts[product.category] = []
-                }
+      return { ...state, restaurantDetails: sortedProducts };
 
-                sortedProducts[product.category].push(product)
+    case "SET_LOADING": {
+      return { ...state, isLoading: action.payload.loading };
+    }
 
-            })
-            sortedProducts = Object.entries(sortedProducts)
+    default:
+      return state;
+  }
+};
 
-            return {...state, restaurantDetails: sortedProducts}
-        
-        default:
-            return state
-
-    }      
-}
-
-export default restaurants
+export default restaurants;

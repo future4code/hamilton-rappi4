@@ -32,6 +32,8 @@ export const LabelSearch = styled.label`
   left: 45px;
   color: #d0d0d0;
   user-select: none;
+  background-color: white;
+  padding: 0 5px;
 `
 
 export const InputSearch = styled.input`
